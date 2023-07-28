@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima</title>
+</head>
+<body>
+    <h1>Pesquise sua Cidade</h1>
+    <input type="text" id="cityInput" placeholder="Digite sua cidade">
+    <button id="searchButton">Pesquisar</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById("searchButton").addEventListener("click", function() {
+            const city = document.getElementById("cityInput").value;
+            fetch(`/search?city=${encodeURIComponent(city)}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("result").innerText = data;
+                })
+                .catch(error => {
+                    console.error('Erro na requisição:', error);
+                });
+        });
+    </script>
+</body>
+</html>
